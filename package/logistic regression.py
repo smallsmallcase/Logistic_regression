@@ -6,6 +6,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
 
 def load_data_set(file_path):
@@ -23,18 +24,38 @@ def sigmoid(int_x):
     return 1/(1 + np.exp(-int_x))
 
 
+# def grad_ascent(data_list, label_list):
+#     data_mat = np.mat(data_list)
+#     label_mat = np.mat(label_list).transpose()
+#     m, n = np.shape(data_mat)  # Row:m , Column:n
+#     alpha = 0.001
+#     max_cycle = 500
+#     weigths = np.ones((n, 1))
+#     # weigths = np.mat(weigths)
+#     for k in range(max_cycle):
+#         h = sigmoid(data_mat * weigths)
+#         error = label_mat - h
+#         weigths += alpha * data_mat.transpose() *error
+#     return weigths
+
+'''
+改进后，随机梯度上升算法
+'''
 def grad_ascent(data_list, label_list):
     data_mat = np.mat(data_list)
     label_mat = np.mat(label_list).transpose()
     m, n = np.shape(data_mat)  # Row:m , Column:n
-    alpha = 0.001
-    max_cycle = 500
+    # alpha = 0.001
+    max_cycle = 150
     weigths = np.ones((n, 1))
-    # weigths = np.mat(weigths)
-    for k in range(max_cycle):
-        h = sigmoid(data_mat * weigths)
-        error = label_mat - h
-        weigths += alpha * data_mat.transpose() *error
+    for j in range(max_cycle):
+        data_index = list(range(m))
+        for i in range(m):
+            alpha = 4/(1.0 + j + i) + 0.01
+            random_index = int(random.uniform(0, len(data_index)))
+            h = sigmoid(data_mat[random_index] * weigths)
+            error = label_mat[random_index] - h
+            weigths += alpha * data_mat[random_index].transpose() * error
     return weigths
 
 
