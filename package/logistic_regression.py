@@ -166,8 +166,8 @@ if __name__ == '__main__':
     # plot(data_list, label_list)
     weights1, weights_array1 = super_grad_ascent(data_list, label_list)
     weights2, weights_array2 = grad_ascent(data_list, label_list)
-    print(np.shape(weights_array1), np.shape(weights1))
-    # plot(data_list, label_list, weights1)
+    # print(np.shape(weights_array1), np.shape(weights1))
+    plot(data_list, label_list, weights1)
     plot_weights(weights_array1,weights_array2)
 
 
